@@ -1,5 +1,0 @@
-F:\Study\Work\GitProjects\ConvexHull\ConvexAlgorithm\bin\Debug\ConvexAlgorithm.dll
-F:\Study\Work\GitProjects\ConvexHull\ConvexAlgorithm\bin\Debug\ConvexAlgorithm.pdb
-F:\Study\Work\GitProjects\ConvexHull\ConvexAlgorithm\obj\Debug\ConvexHullAlgorithm.csprojResolveAssemblyReference.cache
-F:\Study\Work\GitProjects\ConvexHull\ConvexAlgorithm\obj\Debug\ConvexAlgorithm.dll
-F:\Study\Work\GitProjects\ConvexHull\ConvexAlgorithm\obj\Debug\ConvexAlgorithm.pdb
