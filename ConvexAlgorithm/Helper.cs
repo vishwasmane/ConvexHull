@@ -29,23 +29,37 @@ namespace ConvexHullAlgorithm
             return true;
         }
 
-        public static void AllPointsCrossProductIsInSameDirection(Vector startPoint, Vector minXPoint, List<Vector> remainingPoints)
+        public static bool AllPointsCrossProductIsInSameDirection(Vector startPoint, Vector minXPoint, List<Vector> remainingPoints)
         {
             Vector currentVector = new Vector(minXPoint.X - startPoint.X, minXPoint.Y - startPoint.Y);
             currentVector.Normalize();
-            
+
+            int firstVecCrossProdDirection = 0;//No direction
             foreach (Vector point in remainingPoints)
             {
                 if (point.Equals(minXPoint))
                     continue;
 
                 Vector nextVector = new Vector(point.X - minXPoint.X, point.Y - minXPoint.Y);
-                
                 nextVector.Normalize();
                 double crossProduct = Vector.CrossProduct(currentVector, nextVector);
-                
 
+                if (firstVecCrossProdDirection == 0)
+                {
+                    if(crossProduct > 0)
+                        firstVecCrossProdDirection = 1;
+                    else if(crossProduct < 0)
+                        firstVecCrossProdDirection = -1;
+
+                    continue;
+                }
+
+                bool isCrossProductVecInWrongdir =(firstVecCrossProdDirection > 0 && crossProduct < 0) ? true : false;
+                if (isCrossProductVecInWrongdir)
+                    return false;
             }
+
+            return true;
         }
     }
 }
