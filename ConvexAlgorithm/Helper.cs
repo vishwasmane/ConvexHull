@@ -55,6 +55,8 @@ namespace ConvexHullAlgorithm
                 }
 
                 bool isCrossProductVecInWrongdir =(firstVecCrossProdDirection > 0 && crossProduct < 0) ? true : false;
+                if(firstVecCrossProdDirection < 0)
+                    isCrossProductVecInWrongdir = (crossProduct > 0) ? true : false;
                 if (isCrossProductVecInWrongdir)
                     return false;
             }

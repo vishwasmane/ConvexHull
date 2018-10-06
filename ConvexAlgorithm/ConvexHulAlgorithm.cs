@@ -18,6 +18,8 @@ namespace ConvexHullAlgorithm
         public List<Vector> FindConvexHul()
         {
             List<Vector> convectHulPoints= new List<Vector>();
+            if (this.pointsCloud.Count < 3)
+                return convectHulPoints;
 
             //1. Find initial point
             //TODO : Lambda expression
@@ -107,6 +109,10 @@ namespace ConvexHullAlgorithm
                         secondPoint = minXPoint;
                         //convectHulPoints.Add(minXPoint);
                         break;
+                    }
+                    else
+                    {
+                        remainingPoints.Remove(minXPoint);
                     }
                 }
             }
