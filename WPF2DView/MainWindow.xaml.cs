@@ -45,14 +45,15 @@ namespace WPF2DView
             DrawPoints(this.pointsCloud, Colors.White);
             this.pointsCloud.Clear();
 
-            DrawPoints(convexHulPoints, Colors.Green);
+            //DrawPoints(convexHulPoints, Colors.Green);
+            DrawLines(convexHulPoints, Colors.Yellow);
         }
 
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
             ClearCanvas();
         }
-
+        
         void DrawPoints(List<Vector> points, Color pointColor)
         {
             foreach (Vector point in points)
@@ -67,6 +68,33 @@ namespace WPF2DView
             Canvas.SetLeft(ellipse, point.X);
             Canvas.SetTop(ellipse, point.Y);
             Canvas2D.Children.Add(ellipse);
+        }
+
+        void DrawLines(List<Vector> points, Color lineColor)
+        {   
+            for (int i = 0; i < points.Count(); i++)
+            {
+                int endPointIndex = i + 1;
+                if (i == (points.Count() - 1))
+                    endPointIndex = 0;
+
+                Vector startPoint = points[i];
+                Vector endPoint = points[endPointIndex];
+
+                DrawLine(startPoint, endPoint, lineColor);
+            }
+        }
+
+        void DrawLine(Vector startPoint, Vector endPoint, Color lineColor)
+        {
+            var line = new Line();
+            line.X1 = startPoint.X;
+            line.Y1 = startPoint.Y;
+            line.X2 = endPoint.X;
+            line.Y2 = endPoint.Y;
+            line.Stroke = Brushes.Yellow;
+            line.StrokeThickness = 2;
+            Canvas2D.Children.Add(line);
         }
 
         void ClearCanvas()
