@@ -33,20 +33,43 @@ namespace WPF2DView
             Vector positionPoint = new Vector((float)position.X, (float)position.Y);
             pointsCloud.Add(positionPoint);
 
-            var ellipse = new Ellipse() { Width = 5.0, Height = 5.0, Stroke = new SolidColorBrush(Colors.White) };
-            Canvas.SetLeft(ellipse, position.X);
-            Canvas.SetTop(ellipse, position.Y);
-            Canvas2D.Children.Add(ellipse);
+            DrawPoint(positionPoint, Colors.White);
         }
 
         private void ComputeConvexHull_Click(object sender, RoutedEventArgs e)
         {
             ConvexHulAlgorithm convexHul = new ConvexHulAlgorithm(this.pointsCloud);
             List<Vector> convexHulPoints = convexHul.FindConvexHul();
-            Vector v1 = new Vector();
+
+            ClearCanvas();
+            DrawPoints(this.pointsCloud, Colors.White);
+            this.pointsCloud.Clear();
+
+            DrawPoints(convexHulPoints, Colors.Green);
         }
 
         private void Clear_Click(object sender, RoutedEventArgs e)
+        {
+            ClearCanvas();
+        }
+
+        void DrawPoints(List<Vector> points, Color pointColor)
+        {
+            foreach (Vector point in points)
+            {
+                DrawPoint(point, pointColor);
+            }
+        }
+
+        void DrawPoint(Vector point, Color pointColor)
+        {
+            var ellipse = new Ellipse() { Width = 5.0, Height = 5.0, Stroke = new SolidColorBrush(pointColor) };
+            Canvas.SetLeft(ellipse, point.X);
+            Canvas.SetTop(ellipse, point.Y);
+            Canvas2D.Children.Add(ellipse);
+        }
+
+        void ClearCanvas()
         {
             this.Canvas2D.Children.Clear();
         }
